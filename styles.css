@@ -93,36 +93,6 @@ body {
     }
 }
 
-.model-badge {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    color: var(--text-muted);
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 3px 10px;
-    letter-spacing: 0.04em;
-}
-
-.memory-indicator {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    color: var(--text-muted);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    padding: 4px 10px;
-    transition: color 0.3s, border-color 0.3s;
-}
-
-.memory-indicator.active {
-    color: var(--accent);
-    border-color: rgba(182, 245, 66, 0.3);
-}
-
 .reset-btn {
     display: flex;
     align-items: center;
@@ -188,11 +158,6 @@ body {
     color: var(--text);
     margin-bottom: 10px;
     letter-spacing: -0.02em;
-}
-
-.welcome p {
-    font-size: 15px;
-    font-family: var(--font-mono);
 }
 
 .message-row {
@@ -387,9 +352,5 @@ textarea::placeholder {
 
     .input-bar {
         padding: 12px;
-    }
-
-    .model-badge {
-        display: none;
     }
 }

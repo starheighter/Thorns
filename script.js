@@ -2,8 +2,6 @@ const chatArea = document.getElementById('chatArea');
 const input = document.getElementById('myInput');
 const sendBtn = document.getElementById('sendBtn');
 const resetBtn = document.getElementById('resetBtn');
-const memoryCount = document.getElementById('memoryCount');
-const memoryIndicator = document.getElementById('memoryIndicator');
 
 input.addEventListener('input', () => {
     input.style.height = 'auto';
@@ -24,20 +22,9 @@ resetBtn.addEventListener('click', async () => {
     chatArea.innerHTML = `
     <div class="welcome" id="welcome">
       <div class="welcome-icon">◈</div>
-      <h1>What's on your mind?</h1>
-      <p>Ask me anything. I remember the last 10 messages.</p>
+      <h1>HOW ARE YOUR ?</h1>
     </div>`;
-    updateMemory(0);
 });
-
-function updateMemory(count) {
-    memoryCount.textContent = count;
-    if (count > 0) {
-        memoryIndicator.classList.add('active');
-    } else {
-        memoryIndicator.classList.remove('active');
-    }
-}
 
 function removeWelcome() {
     const welcome = document.getElementById('welcome');
@@ -80,30 +67,24 @@ function removeTypingIndicator() {
 async function chat() {
     const userMessage = input.value.trim();
     if (!userMessage) return;
-
     removeWelcome();
     addMessage('user', userMessage);
     input.value = '';
     input.style.height = 'auto';
-
     sendBtn.disabled = true;
     addTypingIndicator();
-
     try {
         const response = await fetch('http://localhost:5000/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: userMessage })
         });
-
         const data = await response.json();
         removeTypingIndicator();
         addMessage('bot', data.response);
-        updateMemory(data.history_length ?? 0);
-
     } catch (error) {
         removeTypingIndicator();
-        addMessage('bot', '⚠ Connection to server failed. Is the server running on port 5000?');
+        addMessage('bot', 'Connection to server failed. Is the server running on port 5000?');
     } finally {
         sendBtn.disabled = false;
         input.focus();
