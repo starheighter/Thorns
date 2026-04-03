@@ -34,11 +34,9 @@ function removeWelcome() {
 function addMessage(role, text) {
     const row = document.createElement('div');
     row.className = `message-row ${role}`;
-
     const bubble = document.createElement('div');
     bubble.className = 'bubble';
     bubble.textContent = text;
-
     row.appendChild(bubble);
     chatArea.appendChild(row);
     chatArea.scrollTop = chatArea.scrollHeight;

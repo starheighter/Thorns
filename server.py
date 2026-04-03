@@ -3,10 +3,17 @@ from flask_cors import CORS
 import requests
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["http://localhost:8080"])
 
 conversation_history = []
 MAX_HISTORY = 10
+
+try:
+    with open("prefix.txt", "r", encoding="utf-8") as file:
+        PREFIX = file.read().strip()
+except FileNotFoundError:
+    PREFIX = ""
+    print("[WARN] prefix.txt not found – no prefix in use.")
 
 def build_prompt(history, new_message):
     prompt = ""
@@ -15,10 +22,7 @@ def build_prompt(history, new_message):
             prompt += f"User: {entry['content']}\n"
         else:
             prompt += f"Assistant: {entry['content']}\n"
-    prefix = ""
-    with open("prefix.txt", "r", encoding="utf-8") as file:
-        prefix = file.read()
-    prompt += f"User: {prefix} {new_message}\nAssistant:"
+    prompt += f"User: {PREFIX} {new_message}\nAssistant:"
     return prompt
 
 @app.route('/chat', methods=['POST'])
@@ -42,7 +46,6 @@ def chat():
         conversation_history = conversation_history[-(MAX_HISTORY * 2):]
     return jsonify({
         'response': assistant_reply,
-        'history_length': len(conversation_history) // 2
     })
 
 @app.route('/reset', methods=['POST'])
