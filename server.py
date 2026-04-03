@@ -22,7 +22,7 @@ def build_prompt(history, new_message):
             prompt += f"User: {entry['content']}\n"
         else:
             prompt += f"Assistant: {entry['content']}\n"
-    prompt += f"User: {PREFIX} {new_message}\nAssistant:"
+    prompt += f"User: {PREFIX}\n{new_message}\nAssistant:"
     return prompt
 
 @app.route('/chat', methods=['POST'])
