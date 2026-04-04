@@ -78,7 +78,7 @@ The `prefixhandler.py` module loads `.txt` files from `prefix/english/` and inje
 
 Each `.txt` file in `prefix/english/` contains one or more **prefix modules**, separated by `$`. One module per file is chosen at random on every request and prepended to the prompt.
 
-### Example: `prefix/english/1.txt`
+### Example: `prefix/english/7.txt`
 
 ```
 Convincingly show him that he is strong enough.
