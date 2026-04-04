@@ -2,37 +2,33 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import requests
 
+from prefixhandler import generate_prefix
+
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:8080"])
 
-conversation_history = []
+history = []
 MAX_HISTORY = 10
 
-try:
-    with open("prefix.txt", "r", encoding="utf-8") as file:
-        PREFIX = file.read().strip()
-except FileNotFoundError:
-    PREFIX = ""
-    print("[WARN] prefix.txt not found – no prefix in use.")
-
-def build_prompt(history, new_message):
+def _build_prompt(user_message):
     prompt = ""
     for entry in history:
         if entry["role"] == "user":
             prompt += f"User: {entry['content']}\n"
         else:
             prompt += f"Assistant: {entry['content']}\n"
-    prompt += f"User: {PREFIX}\n{new_message}\nAssistant:"
+    prefix = generate_prefix(user_message)
+    prompt += f"User: {prefix}\n{user_message}\nAssistant:"
     return prompt
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    global conversation_history
+    global history
     data = request.json
-    user_input = data.get('message', '').strip()
-    if not user_input:
+    user_message = data.get('message', '').strip()
+    if not user_message:
         return jsonify({'response': 'Please enter a message.'}), 400
-    prompt = build_prompt(conversation_history, user_input)
+    prompt = _build_prompt(user_message)
     response = requests.post('http://localhost:11434/api/generate', json={
         'model': 'llama3.2',
         'prompt': prompt,
@@ -40,18 +36,18 @@ def chat():
     })
     result = response.json()
     assistant_reply = result.get('response', '').strip()
-    conversation_history.append({"role": "user", "content": user_input})
-    conversation_history.append({"role": "assistant", "content": assistant_reply})
-    if len(conversation_history) > MAX_HISTORY * 2:
-        conversation_history = conversation_history[-(MAX_HISTORY * 2):]
+    history.append({"role": "user", "content": user_message})
+    history.append({"role": "assistant", "content": assistant_reply})
+    if len(history) > MAX_HISTORY * 2:
+        history = history[-(MAX_HISTORY * 2):]
     return jsonify({
         'response': assistant_reply,
     })
 
 @app.route('/reset', methods=['POST'])
 def reset():
-    global conversation_history
-    conversation_history = []
+    global history
+    history = []
     return jsonify({'status': 'ok', 'message': 'Conversation reset.'})
 
 if __name__ == '__main__':
