@@ -1,17 +1,17 @@
 import os
 import random
 
-DIRECTORY_NAME = "prefix"
+DIRECTORY_PATH = "prefix/english"
 
 def _load_prefix_modules(filename):
     try:
-        with open(f"{DIRECTORY_NAME}/{filename}", "r", encoding="utf-8") as file:
+        with open(f"{DIRECTORY_PATH}/{filename}", "r", encoding="utf-8") as file:
             return file.read().strip()
     except FileNotFoundError:
         return ""
 
 def _prefix_files():
-    return os.listdir(DIRECTORY_NAME)
+    return os.listdir(DIRECTORY_PATH)
 
 def generate_prefix(user_message):
     prefix_files = _prefix_files()
