@@ -100,12 +100,12 @@ Send a user message and receive a model response.
 
 **Request body:**
 ```json
-{ "message": "Hello, how are you?" }
+{ "message": "Can you help me?" }
 ```
 
 **Response:**
 ```json
-{ "response": "I'm doing well, thanks for asking!" }
+{ "response": "Yes, I’m here to help. Could you tell me more about your problem?" }
 ```
 
 ### `POST /reset`
