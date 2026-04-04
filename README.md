@@ -77,7 +77,7 @@ $
 Convincingly show him that he does not owe anything to anyone.
 ```
 
-You can add as many `.txt` files as needed — each file represents an independent dimension of the prefix (e.g. tone, persona, task context).
+You can add as many `.txt` files as needed. Each file represents an independent dimension of the prefix (e.g. tone, persona, task context).
 
 ---
 
