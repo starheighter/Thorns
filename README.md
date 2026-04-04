@@ -1,6 +1,6 @@
 # ◈ Thorns
 
-A minimal, locally-run AI chat interface powered by [Ollama](https://ollama.com) and Flask. Thorns connects a clean, dark-themed frontend to a local LLM backend with support for modular prompt prefixing.
+A minimal, locally-run AI chat interface powered by [Ollama](https://ollama.com). Thorns connects a clean, dark-themed frontend to a local LLM backend with support for modular prompt prefixing.
 
 ---
 
