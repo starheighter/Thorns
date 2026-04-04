@@ -36,14 +36,6 @@ thorns/
 - [Python 3.11](https://www.python.org/)
 - [Ollama](https://ollama.com) with `llama3.2` pulled
 
-### Python Dependencies
-
-Install all required packages via the provided `requirements.txt`:
-
-```bash
-pip install -r requirements.txt
-```
-
 ---
 
 ## Quick Start
@@ -56,10 +48,7 @@ cd Thorns
 # 2. Install dependencies
 pip install -r requirements.txt
 
-# 3. Pull the Ollama model (first time only)
-ollama pull llama3.2
-
-# 4. Make the launch script executable and run it
+# 3. Make the launch script executable and run it
 chmod +x start.sh
 ./start.sh
 ```
