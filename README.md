@@ -45,10 +45,14 @@ thorns/
 git clone https://github.com/starheighter/Thorns.git
 cd Thorns
 
-# 2. Install dependencies
+# 2. Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate
+
+# 3. Install dependencies
 pip install -r requirements.txt
 
-# 3. Make the launch script executable and run it
+# 4. Make the launch script executable and run it
 chmod +x start.sh
 ./start.sh
 ```
