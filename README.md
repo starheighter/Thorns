@@ -33,7 +33,7 @@ thorns/
 
 ## Requirements
 
-- [Python 3.11](https://www.python.org/)
+- [Python 3.10+](https://www.python.org/)
 - [Ollama](https://ollama.com) with `llama3.2` pulled
 
 ---
